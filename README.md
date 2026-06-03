@@ -168,8 +168,3 @@ Durante o desenvolvimento deste projeto foram aplicados conhecimentos relacionad
 
 ---
 
-## 👨‍💻 Autor
-
-**Rangel Tulio**
-
-Projeto desenvolvido para fins acadêmicos e de aprendizado em programação Python.
