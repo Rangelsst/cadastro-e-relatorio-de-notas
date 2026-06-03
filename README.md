@@ -1,99 +1,175 @@
-print('                                                  IFB Asa-Sul                                                     ')
-print('                                                Sistema de Notas                                                 \n')
+# 📚 Sistema de Notas Escolares
 
-def cadastrar_dados(): #função para cadastro de dados como aluno, nivel de escolaridade e disciplinas
+## 📖 Sobre o Projeto
 
+O **Sistema de Notas Escolares** é uma aplicação desenvolvida em Python com o objetivo de realizar o cadastro de alunos, disciplinas, notas e faltas, gerando automaticamente um relatório acadêmico com o resultado final do estudante.
 
-    aluno = input('Digite o nome do aluno: ') #nome do aluno
-    nivel = input('Qual nível de ensino? [Fundamental 2 / Medio]: ') #nivel de escolaridade
-    while nivel not in ['Fundamental 2', 'Medio']:
-        print('Nível de ensino inválido. Por favor, escolha entre "Fundamental 2" ou "Medio".')
-        nivel = input('Qual nível de ensino? [Fundamental 2 / Medio]: ')
-    quantidade = int(input('Quantas matérias deseja cadastrar? ')) #quantidade de matérias que ele deseja cadastrar
+O projeto foi desenvolvido utilizando conceitos fundamentais da programação, como:
 
-    disciplinas = [] #lista para guardar as disciplinas vindas do dicionário
+* Funções
+* Listas
+* Dicionários
+* Estruturas de repetição (`for` e `while`)
+* Estruturas condicionais (`if`, `elif` e `else`)
+* Entrada e saída de dados
+* Organização e reutilização de código
 
-    for c in range(quantidade): #loop para rodar pedindo dados da disciplina quantas vezes o usuario escolher na variável 'quantidade'
-        
-        print(f'\nDisciplina {c + 1}\n') #cadastro de disciplinas
-        nome_disciplina = input('Digite o nome da disciplina: ')
-        nota = float(input('Nota final: '))
-        faltas = int(input('Quantidade de faltas: '))
+Além de atender a um cenário educacional simples, o sistema demonstra a capacidade de modelar dados, validar informações fornecidas pelo usuário e gerar resultados com base em regras de negócio.
 
-        materias_cadastradas = { #dicionário para armazenamento de dados das disciplinas
-            'Nome': nome_disciplina,
-            'Nota': nota,
-            'Faltas': faltas
-        }
+---
 
-        disciplinas.append(materias_cadastradas) #adiciona o dicionário 'materias_cadastradas' na lista 'disciplinas'
+## 🎯 Objetivo
 
-    return aluno,nivel,disciplinas #retorna os dados do aluno, nivel de escolaridade e a lista de disciplinas para as outras funções utilizarem
+Automatizar o processo de registro e análise do desempenho de estudantes, permitindo:
 
+* Cadastro do aluno;
+* Definição do nível de ensino;
+* Registro de disciplinas;
+* Armazenamento de notas e faltas;
+* Cálculo da média geral;
+* Cálculo do total de faltas;
+* Geração de relatório final;
+* Verificação de aprovação ou reprovação.
 
+---
 
+## ⚙️ Funcionalidades
 
-def calcular_notas(disciplinas): #função para calcular a média das notas das disciplinas cadastradas
-    soma = 0 
+### Cadastro de Dados
 
-    for materias_cadastradas in disciplinas:
-        soma += materias_cadastradas['Nota']
+O sistema solicita:
 
-    media = soma / len(disciplinas)
-    return media 
+* Nome do aluno;
+* Nível de ensino (Fundamental II ou Médio);
+* Quantidade de disciplinas;
+* Nota final de cada disciplina;
+* Quantidade de faltas por disciplina.
 
+### Cálculo de Média
 
+A média geral é calculada automaticamente a partir das notas cadastradas.
 
+### Controle de Frequência
 
-def calcular_faltas(disciplinas): #função para calcular o total de faltas das disciplinas cadastradas
-    total_faltas = 0
+O sistema soma todas as faltas registradas para o aluno.
 
-    for materias_cadastradas in disciplinas:
-        total_faltas += materias_cadastradas['Faltas']
+### Relatório Final
 
-    return total_faltas   
+Ao final da execução, é exibido um relatório contendo:
 
+* Dados do aluno;
+* Disciplinas cadastradas;
+* Notas;
+* Faltas;
+* Média final;
+* Total de faltas;
+* Situação do estudante.
 
+---
 
+## 📋 Regras de Aprovação
 
-def gerar_relatorio_final(aluno, nivel, disciplinas, media, total_faltas): #função para gerar o relatório final do aluno, mostrando os dados cadastrados, a média das notas e o total de faltas, além de mostrar se o aluno foi aprovado ou reprovado
+O aluno será considerado aprovado quando:
 
-    print('\n-----==== Relatório Final ====-----\n')
-    
-    print(f'Aluno: {aluno}')
-    
-    print(f'Nível de escolaridade: {nivel}')
-    
-    print('\nDisciplinas Cadastradas:\n')
-    
-    for materias_cadastradas in disciplinas: #loop para mostrar os dados de cada disciplina cadastrada, como nome, nota e faltas
-        print(f"{materias_cadastradas ['Nome']} | Nota: {materias_cadastradas ['Nota']} | Faltas: {materias_cadastradas ['Faltas']}")
+* Média final maior ou igual a 6,0;
+* Frequência mínima de 75%.
 
-    
-    print(f'\nMédia Final: {media:.2f}\n')
-    print(f'Total de faltas: {total_faltas}')
+Caso uma dessas condições não seja atendida, o sistema indicará a reprovação e o motivo.
 
-    if media >= 6 and total_faltas < 16:
-        print('Aprovado!\n')
-        print('Nota final superior a nota mínima')
-        print('Frequencia superior a 75%')
+---
 
-    elif media >= 6 and total_faltas == 16:
-        print('Aprovado!\n')
-        print('Nota final superior a nota mínima')
-        print('Frequencia de 75%')
+## 🛠️ Tecnologias Utilizadas
 
-    elif media >= 6 and total_faltas > 16:
-        print('Reprovado!\n')
-        print('Frequencia inferior a 75%.')
+* Python 3
+* Terminal/Console
 
-    else:
-        print('Reprovado por falta de nota e frequencia!\n')
-        print('Nota final inferior a nota mínima.')
-        print('Frequencia inferior a 75%.')
+---
 
+## 📂 Estrutura do Projeto
 
-aluno, nivel, disciplinas = cadastrar_dados() #chama a função de cadastro de dados e guarda os dados retornados em variáveis.
-total_faltas = calcular_faltas(disciplinas) #chama a função de calcular faltas.
-media = calcular_notas(disciplinas) #chama a função de calcular notas.
-gerar_relatorio_final(aluno, nivel, disciplinas, media, total_faltas) #chama a função de gerar relatório final.
+```text
+Sistema de Notas
+│
+├── cadastrar_dados()
+├── calcular_notas()
+├── calcular_faltas()
+├── gerar_relatorio_final()
+└── execução principal
+```
+
+---
+
+## 🚀 Exemplo de Utilização
+
+### Entrada
+
+```text
+Digite o nome do aluno: João Silva
+
+Qual nível de ensino? [Fundamental 2 / Medio]:
+Medio
+
+Quantas matérias deseja cadastrar?
+3
+
+Disciplina 1
+Matemática
+Nota: 8.5
+Faltas: 2
+
+Disciplina 2
+Português
+Nota: 7.0
+Faltas: 4
+
+Disciplina 3
+História
+Nota: 6.5
+Faltas: 3
+```
+
+### Saída
+
+```text
+-----==== Relatório Final ====-----
+
+Aluno: João Silva
+
+Nível de escolaridade: Medio
+
+Disciplinas Cadastradas:
+
+Matemática | Nota: 8.5 | Faltas: 2
+Português | Nota: 7.0 | Faltas: 4
+História | Nota: 6.5 | Faltas: 3
+
+Média Final: 7.33
+
+Total de faltas: 9
+
+Aprovado!
+
+Nota final superior à nota mínima.
+Frequência superior a 75%.
+```
+
+---
+
+## 💡 Aprendizados Desenvolvidos
+
+Durante o desenvolvimento deste projeto foram aplicados conhecimentos relacionados a:
+
+* Modularização do código através de funções;
+* Manipulação de listas e dicionários;
+* Validação de entrada de dados;
+* Estruturas de decisão;
+* Estruturas de repetição;
+* Organização lógica de programas em Python.
+
+---
+
+## 👨‍💻 Autor
+
+**Rangel Tulio**
+
+Projeto desenvolvido para fins acadêmicos e de aprendizado em programação Python.
